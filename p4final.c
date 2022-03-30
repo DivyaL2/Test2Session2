@@ -1,49 +1,32 @@
 #include<stdio.h>
-int input_array_size()
+int input()
 {
   int n;
-  printf("enter the array size\n");
+  printf("enter the value of n\n");
   scanf("%d",&n);
   return n;
 }
-void init_array(int n, int a[n])
+int find_fibo(int n)
 {
-  
-  for(int i=0;i<n;i++)
-    a[i]=i;
-    a[0]=0;
-    a[1]=0;
-}
-void erotosthenes_sieve(int n, int a[n])
-{
-  int i=2;
-  while(i<sqrt(n))
-  {
-    while(a[i]==0)
-    i++;
-    for(int k=i+i;i<n;k+=i)
-    { 
-      a[k]=0;
-    }
-  }  
-}
-void out_put(int n, int a[n]);
-{
-  for(int i=0;i<n;i++)
+  int temp,n2=0,n1=1;
+  for(int i=1;i<=n;i++)
     {
-      if(a[i]!=0)
-      printf("%d",a[i]);
-    } 
-    printf("/n");
+      temp=n1;
+      n1=n1+n2;
+      n2=temp;
+    }
+  return n2;
+}
+void output(int fibo)
+{
+  printf("The nth number of the given fibonacci series is %d\n",fibo);
+  
 }
 int main()
 {
-  int n;
-  n=input_array_size();
-  int a[n];
-  init_array(n,a);
-  erotosthenes_sieve(n, a);
-  out_put(n,a);
+  int n,fibo;
+  n=input();
+  fibo=find_fibo(n);
+  output(fibo);
   return 0;
 }
-
