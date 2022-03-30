@@ -1,5 +1,4 @@
 #include<stdio.h>
-#include<math.h>
 int input_array_size()
 {
   int n;
@@ -9,39 +8,41 @@ int input_array_size()
 }
 void init_array(int n, int a[n])
 {
+  
   for(int i=0;i<n;i++)
-    {
-      a[i]=i+1;
-    }
-  }
+    a[i]=i;
+    a[0]=0;
+    a[1]=0;
+}
 void erotosthenes_sieve(int n, int a[n])
 {
- for(int i=1;i<n;i++)
+  int i=2;
+  while(i<sqrt(n))
   {
-    if(a[i]==0)
-     continue;
-    for(int j=a[i]+1;j<=n;j++)
-    {
-     if(j%a[i]==0)
-      a[j-1]=0;
-    } 
-  }
-          
+    while(a[i]==0)
+    i++;
+    for(int k=i+i;i<n;k+=i)
+    { 
+      a[k]=0;
+    }
+  }  
 }
-void out_put(int n, int a[n])
-{  for(int i=0;i<n;i++)
-  if (a[i]!=0)
-    printf("%d",a[i]);
-  printf("\n");
+void out_put(int n, int a[n]);
+{
+  for(int i=0;i<n;i++)
+    {
+      if(a[i]!=0)
+      printf("%d",a[i]);
+    } 
+    printf("/n");
 }
 int main()
 {
-  int n; 
+  int n;
   n=input_array_size();
   int a[n];
   init_array(n,a);
-  erotosthenes_sieve(n,a);
-  out_put(n, a);
+  erotosthenes_sieve(n, a);
+  out_put(n,a);
   return 0;
 }
-
